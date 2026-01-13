@@ -1,0 +1,32 @@
+---
+title: Kubernetes Cost Optimization on AWS EKS
+description: Practical strategies to reduce EKS spend: right-sizing, node pools, autoscaling, spot, and observability for chargeback.
+tags: [kubernetes, aws, eks, cost]
+date: 2025-11-10
+---
+
+# Kubernetes Cost Optimization on AWS EKS
+
+Running Kubernetes on AWS gives you flexibility—but costs can grow rapidly without the right guardrails. This post breaks down a pragmatic approach I’ve used to cut EKS costs while maintaining reliability and performance.
+
+## 1) Choose the right node mix
+- Use a mix of On-Demand for baseline and Spot for burstable workloads.
+- Create separate node groups and use taints/tolerations to schedule appropriately.
+
+## 2) Rightsize requests and limits
+- Start with conservative requests and measure actual usage.
+- Use VPA in recommend mode or tools like Goldilocks to guide requests.
+
+## 3) Enable cluster autoscaling
+- Leverage Karpenter or the Cluster Autoscaler.
+- Consolidate nodes and scale to zero for non-prod workloads.
+
+## 4) Observe and allocate
+- Use Prometheus + Grafana and add cost allocation labels (team, service, env).
+- Centralize logs with ELK/OpenSearch to find noisy workloads and anomalies.
+
+## 5) Control egress and storage
+- Prefer private networking, leverage S3 lifecycle policies, and rightsize EBS/GP3.
+
+## Results
+Using the above, I’ve achieved 25–40% EKS cost reduction across multiple environments while preserving SLOs.

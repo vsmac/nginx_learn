@@ -1,0 +1,29 @@
+---
+title: Designing Terraform Modules for Enterprise Scale
+description: Module patterns, versioning, testing, and multi-environment promotion for reliable infrastructure delivery.
+tags: [terraform, iac, modules]
+date: 2025-10-02
+---
+
+# Designing Terraform Modules for Enterprise Scale
+
+As teams and environments grow, Terraform success depends on repeatable, well-versioned modules with clear interfaces.
+
+## Core patterns
+- Inputs/outputs kept minimal and explicit
+- Opinionated defaults with overrides for edge cases
+- Separate root modules for environments (dev/stage/prod)
+
+## Versioning and promotion
+- Semantic versions via registries or Git tags
+- Promotion pipelines: validate → test env → staging → prod
+
+## Testing
+- Unit tests with `terraform validate` and policy as code (OPA/Conftest)
+- Integration tests with ephemeral environments
+
+## Tooling and docs
+- Auto-generate docs from `variables.tf` and `outputs.tf`
+- Pre-commit hooks for fmt, validate, lint
+
+Building with these practices reduces drift, increases reusability, and accelerates safe delivery at scale.
